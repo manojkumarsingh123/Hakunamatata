@@ -1,0 +1,105 @@
+
+{% load staticfiles %}
+
+
+<!--below url is for update items in cart icon in navbar -->
+{% url 'cart:home' as cart_url %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>home page</title>
+
+
+
+    <!-- using this for add to cart icon will come on the navbar -->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
+
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/about.css" %}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+  </head>
+  <body>
+  <!--navbar   -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+          <a href="{% url 'base' %}" class="navbar-brand">Hakunamatata</a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a href="{% url 'home' %}" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item active ">
+                <a href="{% url 'about' %}" class="nav-link">About Us</a>
+              </li>
+              <li class="nav-item active">
+                <a href="{%  url 'services:list'   %}" class="nav-link">Services</a>
+              </li>
+            <li class="nav-item active">
+                <a href="{% url 'Hakunamatata:register' %}" class="nav-link">Register</a>
+              </li>
+
+
+              <!-- Some logic on what to display for log in and log out-->
+      {% if user.is_authenticated %}
+
+       <li class="nav-item active">
+         <a href="{% url 'logout'  %}" class="nav-link">Logout</a>
+       </li>
+
+
+
+       {% else %}
+
+       <li class="nav-item active">
+         <a href="{%  url 'Hakunamatata:user_login'   %}" class="nav-link">Login</a>
+       </li>
+
+
+
+       {% endif %}
+
+       <li class="nav-item active">
+         <a href="{% url 'Hakunamatata:contactform' %}" class="nav-link">Contact us</a>
+       </li>
+<!--below code is for update items in cart icon in navbar -->
+       <li class="nav-item active">
+         <a href="{{ cart_url }}" class="nav-link"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ request.session.cart_total }}</a>
+       </li>
+<!--{{ request.session.cart_total }} this is count the item in cart show into navbar how many are in cart in number form -->
+
+            </ul>
+          </div>
+        </div>
+          </nav>
+
+
+<div class ="container">
+<center><h1>Why Hakunamatata</h1></center>
+<p> Making the right choices with your beauty & wellness services isn't easy. It's hard to know where to look to get inspired, to find all the current trends and to pick a style that'll suit you. We are here to choose always best, thats perfect for you</p>
+<center><h1>What We Do</h1></center>
+<p> Hakunamatata is a marketplace which connects people with Beauty & Wellness venues and Stylists. We’re building a new way to discover and experience beauty & wellness services online.
+We gather information from salons on a regular basis to ensure our data is fresh and create a portfolio of stylists & hairdressers working with each salon. Each of the hairdresser or barbers has their portfolio of real work.</p>
+<center><h1>Our mission</h1></center>
+<p> Our mission is to ensure nobody has a bad experience.</p>
+</div>
+
+
+
+
+      </body>
+      <html>

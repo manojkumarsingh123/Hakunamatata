@@ -1,0 +1,136 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+
+    <!-- using this for add to cart icon will come on the navbar -->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
+
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/registration.css" %}"/>
+
+          <!--navbar   -->
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <div class="container">
+                  <a href="{% url 'base' %}" class="navbar-brand">Hakunamatata</a>
+                  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item active">
+                        <a href="{% url 'base' %}" class="nav-link">Home</a>
+                      </li>
+                      <li class="nav-item active">
+                        <a href="{% url 'about' %}" class="nav-link">About Us</a>
+                      </li>
+                      <li class="nav-item active">
+                        <a href="{%  url 'services:list'   %}" class="nav-link">Services</a>
+                      </li>
+                    <li class="nav-item active">
+                        <a href="{% url 'Hakunamatata:register' %}" class="nav-link">Register</a>
+                      </li>
+
+
+                      <!-- Some logic on what to display for log in and log out-->
+              {% if user.is_authenticated %}
+
+               <li class="nav-item active">
+                 <a href="{% url 'logout'  %}" class="nav-link">Logout</a>
+               </li>
+
+
+
+               {% else %}
+
+               <li class="nav-item active">
+                 <a href="{%  url 'Hakunamatata:user_login'   %}" class="nav-link">Login</a>
+               </li>
+
+
+
+               {% endif %}
+
+               <li class="nav-item active">
+                 <a href="{% url 'Hakunamatata:contactform' %}" class="nav-link">Contact us</a>
+               </li>
+
+               <!--below code is for update items in cart icon in navbar -->
+                      <li class="nav-item active">
+                        <a href="{{ cart_url }}" class="nav-link"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  {{ request.session.cart_total }}</a>
+                      </li>
+        <!--{{ request.session.cart_total }} this is count the item in cart show into navbar how many are in cart in number form -->
+
+
+
+
+
+                    </ul>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+              </nav>
+
+  <div class="container">
+    <div class="jumbotron">
+      {% if registered %}
+        <h1>Thank you for registering!</h1>
+      {% else %}
+        <h1>Register Here</h1>
+        <h3>Just fill out the form.</h3>
+
+        <form enctype="multipart/form-data" method="POST">
+          <!-- using multipart/form-data hence we can able to upload img file -->
+          {% csrf_token %}
+
+          {{ user_form.as_p }} <!-- go to the user form and ask username,pass and email -->
+          {{ profile_form.as_p }}<!-- go to the profile form and ask profile img -->
+          <!-- means that grabing info from user and profile form -->
+
+          <input type="submit" name="" value="Register">
+        </form>
+
+      {% endif %}
+
+    </div>
+
+  </div>
+
+  <footer id="main-footer" class="text-center p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p>Copyright &copy;
+            <span id="year"></span>HAKUNAMATATA</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+</body>
+</html>
+
+<!--pasasing context dictionary in registerview must same name used
+here three context user_form'
+ 'profile_form'
+ 'registered' are used for as the key in view.py file -->

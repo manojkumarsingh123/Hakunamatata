@@ -1,0 +1,91 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" href="{% static "css/special.css" %}"/>
+  <!--navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+          <a href="{% url 'base' %}" class="navbar-brand">Hakunamatata</a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a href="{% url 'base' %}" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item active">
+                <a href="{% url 'about' %}" class="nav-link">About Us</a>
+              </li>
+              <li class="nav-item active">
+                <a href="{%  url 'services:list'   %}" class="nav-link">Services</a>
+              </li>
+            <li class="nav-item active">
+                <a href="{% url 'Hakunamatata:register' %}" class="nav-link">Register</a>
+              </li>
+
+
+              <!-- Some logic on what to display for log in and log out -->
+      {% if user.is_authenticated %}
+
+       <li class="nav-item active">
+         <a href="{% url 'logout'  %}" class="nav-link">Logout</a>
+       </li>
+
+
+
+       {% else %}
+
+       <li class="nav-item active">
+         <a href="{%  url 'Hakunamatata:user_login'   %}" class="nav-link">Login</a>
+       </li>
+
+
+
+       {% endif %}
+
+       <li class="nav-item active">
+         <a href="{% url 'Hakunamatata:contactform' %}" class="nav-link">Contact us</a>
+       </li>
+
+
+            </ul>
+          </div>
+        </div>
+
+
+
+
+
+
+
+      </nav>
+<div class="container">
+  <div class="jumbotron">
+
+    {% if user.is_authenticated %}
+        <h1>Welcome {{ user.username }}</h1>
+    {% else %}
+        <h2>Welcome to the site!</h2>
+    {% endif %}
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

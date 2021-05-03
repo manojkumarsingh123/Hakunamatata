@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+
+
+<div class="card" style="width: 18rem;">
+{% if instance.image %}
+        <img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title}} ">
+{% endif %}
+    <div class="card-body">
+    <h5 class="card-title">{{ instance.title }}</h5>
+    <p class="card-text">{{ instance.description}}</p>
+    <p class="card-Contact">{{ instance.Contact}}</p>
+    <p class="card-Email ">{{ instance.Email }}</p>
+    <p class="card-Address_info">{{ instance.Address_info}}</p>
+    <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">view </a>
+
+    <!-- means that title image all these part here comes from model with the   help of get_absolute_url -->
+  </div>
+</div>

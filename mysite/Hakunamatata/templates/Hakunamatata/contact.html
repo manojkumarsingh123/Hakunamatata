@@ -1,0 +1,183 @@
+
+{% load staticfiles %}
+{% load bootstrap4 %}
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>contact</title>
+
+    <!-- using this for add to cart icon will come on the navbar -->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static "css/contact.css" %}"/>
+  </head>
+  <body>
+
+    <!--navbar   -->
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+          <div class="container">
+            <a href="{% url 'base' %}" class="navbar-brand">Hakunamatata</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a href="{% url 'base' %}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a href="{% url 'about' %}" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item active">
+                  <a href="{%  url 'services:list'   %}" class="nav-link">Services</a>
+                </li>
+              <li class="nav-item active">
+                  <a href="{% url 'Hakunamatata:register' %}" class="nav-link">Register</a>
+                </li>
+
+
+                <!-- Some logic on what to display for log in and log out-->
+        {% if user.is_authenticated %}
+
+         <li class="nav-item active">
+           <a href="{% url 'logout'  %}" class="nav-link">Logout</a>
+         </li>
+
+
+
+         {% else %}
+
+         <li class="nav-item active">
+           <a href="{%  url 'Hakunamatata:user_login'   %}" class="nav-link">Login</a>
+         </li>
+
+
+
+         {% endif %}
+
+         <li class="nav-item active">
+           <a href="{% url 'Hakunamatata:contactform' %}" class="nav-link">Contact us</a>
+         </li>
+
+         <!--below code is for update items in cart icon in navbar -->
+                <li class="nav-item active">
+                  <a href="{{ cart_url }}" class="nav-link"><i class="fa fa-shopping-cart" aria-hidden="true"></i>  {{ request.session.cart_total }}</a>
+                </li>
+  <!--{{ request.session.cart_total }} this is count the item in cart show into navbar how many are in cart in number form -->
+
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+
+
+
+
+
+
+
+        </nav>
+
+
+
+
+
+
+
+
+<div class="container">
+<div class = "jumbotron">
+    <h1>Contact Us:</h1>
+
+
+      <form method="POST">
+        <!--{{ form.as_p }} -->
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class='btn btn-primary' value="Submit">
+      </form>
+
+    </div>
+</div>
+    <!--FOOTER -->
+    <footer id="main-footer" class="text-center p-4">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <p>Copyright &copy;
+              <span id="year"></span>HAKUNAMATATA</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class='text-center'>
+          <h1>{{ title }}</h1>
+          <h1>Hello, world we're working!</h1>
+      </div>
+      <div class='container'>
+      <div class='row'>
+        <div class='col'>
+                <p>{{ content }}</p>
+            <div class='col-md-6 col-12 mx-auto'>
+              <p>{{ content }}</p>
+            <form method='POST'>{% csrf_token %}
+              {{form}}
+
+              <button type = 'submit' class ='btn-default'>Submit</button>
+
+            </form>
+
+
+            </div>
+        </div>
+      </div>
+      </div> -->
