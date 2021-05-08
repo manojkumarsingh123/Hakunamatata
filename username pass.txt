@@ -1,3 +1,0 @@
-usernam=manoj
-pass mannu123
-mailid=2017manoj11@gmail.com
